@@ -24,44 +24,40 @@ public class Planilha {
     }
 
     public void setCel(int dados, int i, int j) {
-        try{
+        try {
             celulas[i][j].adicionar(dados);
-        }
-        catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Atribuicao invalida");
         }
     }
 
     public void setCel(String dados, int i, int j) {
-        try{
+        try {
             celulas[i][j].adicionar(dados);
-        }
-        catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Atribuicao invalida");
         }
     }
 
     public void setCel(Formula dados, int i, int j) {
-        try{
+        try {
             celulas[i][j].adicionar(dados);
-        }
-        catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Atribuicao invalida");
         }
     }
 
     public Celula getCel(int i, int j) {
-        try{
+        try {
             return celulas[i][j];
-        }
-        catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Tentativa de acessar dados inexistentes");
             return new Celula();
         }
     }
 
     public void mostraPlan() {
-        for (int i = 0; i < comprimento; i++){
+        for (int i = 0; i < comprimento; i++) {
             System.out.print("======");
         }
         System.out.print("\n");
@@ -101,8 +97,7 @@ public class Planilha {
             limpaCels(iA + 1, iB, jA, jB);
             //recursivamente limpa as celulas horizontalmente
             limpaCels(iA, iB, jA + 1, jB);
-        }
-        catch (ArrayIndexOutOfBoundsException e) {
+        } catch (ArrayIndexOutOfBoundsException e) {
             return;
         }
     }
@@ -113,7 +108,7 @@ public class Planilha {
                 for (int j = 0; j < comprimento; j++) {
                     if (!celulas[i][j].isVazia()) {
                         out.print(celulas[i][j].toString() + ";");
-                    } else{
+                    } else {
                         out.print(";");
                     }
                 }
@@ -142,7 +137,7 @@ public class Planilha {
                                 celulas[i][j] = new Celula(valorCelulaDouble);
                             } catch (NumberFormatException e) {
                                 // se essa conversao gerar uma excessao, o valor eh armazenado em celulas como String
-                                if (valorCelula.equals("")){
+                                if (valorCelula.equals("")) {
                                     celulas[i][j] = new Celula();
                                 } else {
                                     celulas[i][j] = new Celula(valorCelula);
