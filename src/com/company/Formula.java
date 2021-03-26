@@ -23,6 +23,7 @@ public class Formula {
                 case "-" -> resultado = new Celula(a - b);
                 case "/" -> resultado = new Celula(a / b);
                 case "*" -> resultado = new Celula(a * b);
+                default -> resultado = new Celula("Erro");
             }
         } else {
             resultado = new Celula("Erro");

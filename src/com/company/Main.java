@@ -1,27 +1,39 @@
 package com.company;
 
+import java.util.Random;
+
 public class Main {
 
     public static void main(String[] args) {
         Planilha p = new Planilha(5, 5);
 
-        p.setCel(5, 2, 2);
-        p.setCel(10, 0, 0);
-        p.setCel(new Formula("+", p.getCel(2, 2), p.getCel(0, 0)), 3, 3);
-        p.setCel(0, 4, 4);
-        p.setCel(new Formula("/", p.getCel(0, 2), p.getCel(4, 4)), 0, 4);
-
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                p.setCel(1, i, j);
+        //Enchendo a planilha com numeros aleatorios para teste
+        Random r = new Random();
+        for (int i = 0; i < 10; i++){
+            for (int j = 0; j < 10; j++){
+                p.setCel(r.nextInt(1000), i, j);
             }
         }
 
-        p.mostraPlan();
-        System.out.println("==========================");
-        //p.limpaCels(0, 2, 2, 4);
-        p.mostraPlan();
+        //p.lePlan("planteste.csv");
+
+        p.setCel("Joao", 3,3);
+        p.setCel(new Formula("+", p.getCel(0,0), p.getCel(1,1)), 4,4);
+        p.setCel(0,0);
+
         p.salvaPlan("planteste.csv");
+        p.mostraPlan();
+        //isso vai limpar toda a planilha
+        p.limpaCels(0, 15, 0, 15);
+
+
+        //p.setCel(new Formula("+", p.getCel(4,4), p.getCel(0,0)), 1, 1);
+
+        p.salvaPlan("planteste2.csv");
+        p.mostraPlan();
+
+        p.lePlan("planteste.csv");
+        p.mostraPlan();
     }
 }
 
