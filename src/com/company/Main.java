@@ -9,12 +9,13 @@ public class Main {
 
         //Enchendo a planilha com numeros aleatorios para teste
         Random r = new Random();
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
                 p.setCel(r.nextInt(1000), i, j);
             }
         }
 
+        p.mostraPlan();
         //p.lePlan("planteste.csv");
 
         p.setCel("Joao", 3, 3);

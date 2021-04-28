@@ -19,37 +19,37 @@ public class Planilha {
         }
     }
 
-    public void setCel(int i, int j) {
-        celulas[i][j].limparCelula();
+    public void setCel(int linha, int coluna) {
+        celulas[linha][coluna].limparCelula();
     }
 
-    public void setCel(int dados, int i, int j) {
+    public void setCel(int dados, int linha, int coluna) {
         try {
-            celulas[i][j].adicionar(dados);
+            celulas[linha][coluna].adicionar(dados);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Atribuicao invalida");
         }
     }
 
-    public void setCel(String dados, int i, int j) {
+    public void setCel(String dados, int linha, int coluna) {
         try {
-            celulas[i][j].adicionar(dados);
+            celulas[linha][coluna].adicionar(dados);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Atribuicao invalida");
         }
     }
 
-    public void setCel(Formula dados, int i, int j) {
+    public void setCel(Formula dados, int linha, int coluna) {
         try {
-            celulas[i][j].adicionar(dados);
+            celulas[linha][coluna].adicionar(dados);
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Atribuicao invalida");
         }
     }
 
-    public Celula getCel(int i, int j) {
+    public Celula getCel(int linha, int coluna) {
         try {
-            return celulas[i][j];
+            return celulas[linha][coluna];
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Tentativa de acessar dados inexistentes");
             return new Celula();
@@ -71,11 +71,11 @@ public class Planilha {
         }
     }
 
-    public void mostraPlan(int iA, int iB, int jA, int jB) {
+    public void mostraPlan(int linhaInicial, int linhaFinal, int colunaInicial, int colunaFinal) {
         try {
-            for (int i = iA; i < iB; i++) {
+            for (int i = linhaInicial; i < linhaFinal; i++) {
                 System.out.print(i + 1 + "|");
-                for (int j = jA; j < jB; j++) {
+                for (int j = colunaInicial; j < colunaFinal; j++) {
                     //optei por nao utilizar os indices (A,B,C,D,E...), porque eles nao ficavam alinhados as celulas
                     System.out.print(celulas[i][j].toString());
                     System.out.print("|");
@@ -87,16 +87,16 @@ public class Planilha {
         }
     }
 
-    public void limpaCels(int iA, int iB, int jA, int jB) {
-        if (iA > iB || jA > jB) {
+    public void limpaCels(int linhaInicial, int linhaFinal, int colunaInicial, int colunaFinal) {
+        if (linhaInicial > linhaFinal || colunaInicial > colunaFinal) {
             return;
         }
         try {
-            celulas[iA][jA].limparCelula();
+            celulas[linhaInicial][colunaInicial].limparCelula();
             //recursivamente limpas as celulas verticalmente
-            limpaCels(iA + 1, iB, jA, jB);
+            limpaCels(linhaInicial + 1, linhaFinal, colunaInicial, colunaFinal);
             //recursivamente limpa as celulas horizontalmente
-            limpaCels(iA, iB, jA + 1, jB);
+            limpaCels(linhaInicial, linhaFinal, colunaInicial + 1, colunaFinal);
         } catch (ArrayIndexOutOfBoundsException e) {
             return;
         }
