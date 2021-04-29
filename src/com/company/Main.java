@@ -11,7 +11,7 @@ public class Main {
         Random r = new Random();
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                p.setCel(r.nextInt(1000), i, j);
+                p.setCel((double) r.nextInt(1000), i, j);
             }
         }
 
@@ -35,6 +35,8 @@ public class Main {
 
         p.lePlan("planteste.csv");
         p.mostraPlan();
+
+        p.mostraPlan(-5,1000,0,1000);
     }
 }
 

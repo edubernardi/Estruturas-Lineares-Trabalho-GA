@@ -23,7 +23,7 @@ public class Planilha {
         celulas[linha][coluna].limparCelula();
     }
 
-    public void setCel(int dados, int linha, int coluna) {
+    public void setCel(Double dados, int linha, int coluna) {
         try {
             celulas[linha][coluna].adicionar(dados);
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -72,9 +72,16 @@ public class Planilha {
     }
 
     public void mostraPlan(int linhaInicial, int linhaFinal, int colunaInicial, int colunaFinal) {
-        try {
-            for (int i = linhaInicial; i < linhaFinal; i++) {
-                System.out.print(i + 1 + "|");
+        if (linhaInicial < 0) {linhaInicial = 0;}
+        if (colunaInicial < 0) {colunaInicial = 0;}
+
+        for (int i = 0; i < comprimento; i++) {
+            System.out.print("======");
+        }
+        for (int i = linhaInicial; i < linhaFinal; i++) {
+            try{
+                Object valor = celulas[i][0];
+                System.out.print("\n" + (i + 1) + "|");
                 for (int j = colunaInicial; j < colunaFinal; j++) {
                     //optei por nao utilizar os indices (A,B,C,D,E...), porque eles nao ficavam alinhados as celulas
                     System.out.print(celulas[i][j].toString());
@@ -82,8 +89,7 @@ public class Planilha {
                 }
                 System.out.print("\n");
             }
-        } catch (IndexOutOfBoundsException e) {
-            System.out.println(e.getMessage());
+            catch (IndexOutOfBoundsException e) {}
         }
     }
 

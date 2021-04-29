@@ -4,19 +4,19 @@ public class Formula {
     private Celula resultado;
 
     public Formula(String operation, Celula celA, Celula celB) {
-        if (celA.isTemFormula()) {
-            celA = celA.getFormula().getResultado();
-        } else if (celB.isTemFormula()) {
-            celB = celB.getFormula().getResultado();
+        if (celA.getDados() instanceof Formula) {
+            celA = ((Formula) celA.getDados()).getResultado();
+        } else if (celB.getDados() instanceof Formula) {
+            celB = ((Formula) celB.getDados()).getResultado();
         }
-        if (celA.isVazia() || celB.isVazia()) {
+        if (celA.getDados() == null || celB.getDados() == null) {
             resultado = new Celula("ERRO");
-        } else if (celA.isTemString() && celB.isTemString()) {
+        } else if (celA.getDados() instanceof String && celB.getDados() instanceof String) {
             //concatenacao das strings
-            resultado = new Celula(celA.getDadosS() + celB.getDadosD());
-        } else if (celA.isTemDouble() && celB.isTemDouble()) {
-            double a = celA.getDadosD();
-            double b = celB.getDadosD();
+            resultado = new Celula((String) celA.getDados() + celB.getDados());
+        } else if (celA.getDados() instanceof Double && celB.getDados() instanceof Double) {
+            Double a = (Double) celA.getDados();
+            Double b = (Double) celB.getDados();
 
             switch (operation) {
                 case "+" -> resultado = new Celula(a + b);
@@ -26,7 +26,7 @@ public class Formula {
                 default -> resultado = new Celula("Erro");
             }
         } else {
-            resultado = new Celula("Erro");
+            resultado = new Celula("ERRO");
         }
     }
 

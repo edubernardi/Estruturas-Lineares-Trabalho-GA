@@ -1,117 +1,61 @@
 package com.company;
 
 public class Celula {
-    private boolean vazia;
-    private boolean temDouble;
-    private boolean temFormula;
-    private boolean temString;
-
-    private String dadosS;
-    private double dadosD;
-    private Formula formula;
+    private Object dados;
 
     public Celula() {
-        vazia = true;
-        temDouble = false;
-        temFormula = false;
-        temString = false;
+        this.dados = null;
     }
 
-    public Celula(String dadosS) {
-        this.dadosS = dadosS;
-        vazia = false;
-        temDouble = false;
-        temFormula = false;
-        temString = true;
+    public Celula(Object dados) {
+        if (dados instanceof Double || dados instanceof String || dados instanceof Formula){
+            this.dados = dados;
+        }
+        else{
+            System.out.println("Tipo invalido");
+        }
     }
 
-    public Celula(double n) {
-        this.dadosD = n;
-        vazia = false;
-        temDouble = true;
-        temFormula = false;
-        temString = false;
-    }
-
-    public Celula(Formula formula) {
-        this.formula = formula;
-        vazia = false;
-        temDouble = false;
-        temFormula = true;
-        temString = false;
-    }
-
-    //esses metodos vao substituir os dados na celula, independente se esta vazia ou nao
-    public void adicionar(int n) {
-        vazia = false;
-        temFormula = false;
-        temString = false;
-        temDouble = true;
-        this.dadosD = n;
-    }
-
-    public void adicionar(String s) {
-        vazia = false;
-        temFormula = false;
-        temString = true;
-        temDouble = false;
-        this.dadosS = s;
-    }
-
-    public void adicionar(Formula f) {
-        vazia = false;
-        temFormula = true;
-        temString = false;
-        temDouble = false;
-        this.formula = f;
+    //esse metodo vai substituir os dados na celula, independente se esta vazia ou nao
+    public void adicionar(Object dados) {
+        this.dados = dados;
     }
 
     public void limparCelula() {
-        vazia = true;
-        temString = false;
-        temFormula = false;
-        temDouble = false;
+        dados = null;
     }
 
     public String toString() {
-        if (vazia) {
+        if (dados == null) {
             return "    ";
-        } else if (temDouble) {
-            return "" + dadosD;
-        } else if (temString) {
-            return dadosS;
-        } else if (temFormula) {
-            return formula.toString();
+        } else if (dados instanceof Double) {
+            return "" + dados;
+        } else if (dados instanceof String) {
+            return (String) dados;
+        } else if (dados instanceof Formula) {
+            return dados.toString();
         } else {
             return "ERRO";
         }
     }
 
-    public String getDadosS() {
-        return dadosS;
-    }
-
-    public double getDadosD() {
-        return dadosD;
-    }
-
-    public Formula getFormula() {
-        return formula;
+    public Object getDados() {
+        return dados;
     }
 
     public boolean isVazia() {
-        return vazia;
+        return dados == null;
     }
 
     public boolean isTemDouble() {
-        return temDouble;
+        return dados instanceof Double;
     }
 
     public boolean isTemFormula() {
-        return temFormula;
+        return dados instanceof Formula;
     }
 
     public boolean isTemString() {
-        return temString;
+        return dados instanceof String;
     }
 }
