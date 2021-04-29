@@ -42,20 +42,4 @@ public class Celula {
     public Object getDados() {
         return dados;
     }
-
-    public boolean isVazia() {
-        return dados == null;
-    }
-
-    public boolean isTemDouble() {
-        return dados instanceof Double;
-    }
-
-    public boolean isTemFormula() {
-        return dados instanceof Formula;
-    }
-
-    public boolean isTemString() {
-        return dados instanceof String;
-    }
 }

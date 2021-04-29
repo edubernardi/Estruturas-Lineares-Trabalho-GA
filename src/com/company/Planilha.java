@@ -112,7 +112,7 @@ public class Planilha {
         try (PrintWriter out = new PrintWriter(new FileWriter(nomeArquivo))) {
             for (int i = 0; i < altura; i++) {
                 for (int j = 0; j < comprimento; j++) {
-                    if (!celulas[i][j].isVazia()) {
+                    if (celulas[i][j].getDados() != null) {
                         out.print(celulas[i][j].toString() + ";");
                     } else {
                         out.print(";");
