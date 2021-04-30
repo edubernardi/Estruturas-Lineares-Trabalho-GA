@@ -29,7 +29,7 @@ public class Celula {
         if (dados == null) {
             return "    ";
         } else if (dados instanceof Double) {
-            return "" + dados;
+            return "" + String.format("%.2f", dados);
         } else if (dados instanceof String) {
             return (String) dados;
         } else if (dados instanceof Formula) {

@@ -58,13 +58,26 @@ public class Planilha {
 
     public void mostraPlan() {
         for (int i = 0; i < comprimento; i++) {
-            System.out.print("======");
+            System.out.print("=================");
+        }
+        System.out.print("\n |");
+        for (int j = 0; j < comprimento; j++){
+            Character letra = (char) (j + 65);
+            System.out.print("       " + letra + "       |");
         }
         System.out.print("\n");
         for (int i = 0; i < celulas.length; i++) {
-            System.out.print(i + 1 + "|");
+            System.out.print(i + "|");
             for (int j = 0; j < celulas[i].length; j++) {
-                System.out.print(celulas[i][j].toString());
+                String conteudo = celulas[i][j].toString();
+                while (conteudo.length() < 15){
+                    conteudo = " " + conteudo;
+                }
+                if (conteudo.length() > 15){
+                    conteudo = conteudo.substring(0,12);
+                    conteudo += "...";
+                }
+                System.out.print(conteudo);
                 System.out.print("|");
             }
             System.out.print("\n");
@@ -76,15 +89,30 @@ public class Planilha {
         if (colunaInicial < 0) {colunaInicial = 0;}
 
         for (int i = 0; i < comprimento; i++) {
-            System.out.print("======");
+            System.out.print("=================");
         }
+
+        System.out.print("\n |");
+        for (int j = 0; j < colunaFinal - colunaInicial; j++){
+            Character letra = (char) (j + 65);
+            System.out.print("       " + letra + "       |");
+        }
+        System.out.print("\n");
+
         for (int i = linhaInicial; i < linhaFinal; i++) {
             try{
                 Object valor = celulas[i][0];
-                System.out.print("\n" + (i + 1) + "|");
+                System.out.print(i + "|");
                 for (int j = colunaInicial; j < colunaFinal; j++) {
-                    //optei por nao utilizar os indices (A,B,C,D,E...), porque eles nao ficavam alinhados as celulas
-                    System.out.print(celulas[i][j].toString());
+                    String conteudo = celulas[i][j].toString();
+                    while (conteudo.length() < 15){
+                        conteudo = " " + conteudo;
+                    }
+                    if (conteudo.length() > 15){
+                        conteudo = conteudo.substring(0,12);
+                        conteudo += "...";
+                    }
+                    System.out.print(conteudo);
                     System.out.print("|");
                 }
                 System.out.print("\n");
@@ -163,6 +191,15 @@ public class Planilha {
             }
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void mostraCel(int linha, int coluna){
+        try{
+            System.out.println(celulas[linha][coluna].toString());
+        }
+        catch (Exception e){
+
         }
     }
 }

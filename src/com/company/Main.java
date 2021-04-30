@@ -5,38 +5,49 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) {
+        //Gerando e enchendo a planilha
         Planilha p = new Planilha(5, 5);
 
-        //Enchendo a planilha com numeros aleatorios para teste
-        Random r = new Random();
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                p.setCel((double) r.nextInt(1000), i, j);
-            }
-        }
+        p.setCel("Funcionarios",0,0);
+        p.setCel("Pedro",1,0);
+        p.setCel("Bianca",2,0);
+        p.setCel("Raphael da Silva",3,0);
+
+        p.setCel("Salario", 0, 1);
+        p.setCel(2000.0, 1, 1);
+        p.setCel(2500.0, 2, 1);
+        p.setCel(5000.0, 3, 1);
+
+        p.setCel("Horas/dia", 0, 2);
+        p.setCel(6.0, 1, 2);
+        p.setCel(8.0, 2, 2);
+        p.setCel(8.0, 3, 2);
+
+        p.setCel("Horas/mes", 0, 3);
+        p.setCel(new Formula("*", p.getCel(1,2), 20.0), 1, 3);
+        p.setCel(new Formula("*", p.getCel(2,2), 20.0), 2, 3);
+        p.setCel(new Formula("*", p.getCel(3,2), 20.0), 3, 3);
+
+        p.setCel("Salario/hora", 0, 4);
+        p.setCel(new Formula("/", p.getCel(1,1), p.getCel(1,3)), 1, 4);
+        p.setCel(new Formula("/", p.getCel(2,1), p.getCel(2,3)), 2, 4);
+        p.setCel(new Formula("/", p.getCel(3,1), p.getCel(3,3)), 3, 4);
 
         p.mostraPlan();
-        //p.lePlan("planteste.csv");
+        p.mostraCel(3,0);
 
-        p.setCel("Joao", 3, 3);
-        p.setCel(new Formula("+", p.getCel(0, 0), p.getCel(1, 1)), 4, 4);
-        p.setCel(0, 0);
+        //Salvamento e carregamento
+        p.salvaPlan("funcionarios.csv");
+        Planilha b = new Planilha(5,5);
+        b.lePlan("funcionarios.csv");
+        b.mostraPlan();
 
-        p.salvaPlan("planteste.csv");
-        p.mostraPlan();
-        //isso vai limpar toda a planilha
-        p.limpaCels(0, 15, 0, 15);
+        //Limpa celulas
+        b.limpaCels(0,2,0,100);
+        b.mostraPlan();
 
+        //b.setCel(new Formula("/", 5.0, 0.0), 0,0);
 
-        //p.setCel(new Formula("+", p.getCel(4,4), p.getCel(0,0)), 1, 1);
-
-        p.salvaPlan("planteste2.csv");
-        p.mostraPlan();
-
-        p.lePlan("planteste.csv");
-        p.mostraPlan();
-
-        p.mostraPlan(-5,1000,0,1000);
     }
 }
 
